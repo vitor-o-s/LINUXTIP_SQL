@@ -13,3 +13,52 @@
 -- MAGIC 10. Selecione os pedidos feitos em dezembro de 2017 e entregues com atraso.
 -- MAGIC 11. Selecione os pedidos com avaliação maior ou igual que 4.
 -- MAGIC 12. Selecione pedidos pagos com cartão de crédito com duas ou mais parcelas menores que R$40,00.
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.cliente WHERE descCidade = 'sao paulo'
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.cliente WHERE descUF = 'SP'
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.vendedor WHERE descCidade = 'rio de janeiro' OR descUF = 'SP'
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.produto WHERE descCategoria IN ('perfumaria', 'bebes') AND vlAlturaCm > 5
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.item_pedido WHERE idPedidoItem >= 2
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.item_pedido WHERE vlFrete > vlPreco 
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.pedido WHERE descSituacao IN ('invoiced', 'processing', 'calceled', 'unavailable')
+-- SELECT * FROM silver.olist.pedido WHERE dtEnvio IS NULL
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.pedido WHERE date(dtEstimativaEntrega) < date(dtEntregue)
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.pedido WHERE date_diff(date(dtEstimativaEntrega), date(dtEntregue)) = 2
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.pedido WHERE year(dtPedido) = 2017 AND month(dtPedido) = 12 AND date(dtEstimativaEntrega) < date(dtEntregue)
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.avaliacao_pedido WHERE vlNota >= 4
+
+-- COMMAND ----------
+
+SELECT * FROM silver.olist.pagamento_pedido WHERE descTipoPagamento = 'credit_card' AND nrParcelas >= 2 AND vlPagamento/nrParcelas < 40.00
