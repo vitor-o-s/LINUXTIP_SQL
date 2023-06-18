@@ -1,5 +1,5 @@
 # LINUXTIP_SQL
-Codes from [LINUX TIPS SQL course]()
+Codes from [LINUX TIPS SQL course](https://www.linuxtips.io/sql-essentials)
 
 The original data can be downloaded by clicking [here](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce).
 
