@@ -160,7 +160,7 @@ WHERE dtEntregue IS NOT NULL
 
 GROUP BY t2.descUF
 
-ORDER BY qtdDias
+ORDER BY qtdDias DESC
 
 -- COMMAND ----------
 
@@ -216,3 +216,22 @@ ON t1.idCliente = t2.idCliente
 GROUP BY t2.descUF
 
 ORDER BY avgPedidoCliente DESC
+
+-- COMMAND ----------
+
+-- 11. Extra - Qual vendedor que mais vendeus PCs?
+SELECT 
+  t3.idVendedor,
+  count(t1.idPedido) as qtdPcs
+FROM silver.olist.item_pedido AS t1
+LEFT JOIN silver.olist.produto AS t2
+ON t1.idProduto = t2.idProduto
+
+LEFT JOIN silver.olist.vendedor AS t3
+ON t1.idVendedor = t3.idVendedor
+
+WHERE t2.descCategoria = 'pcs'
+
+GROUP BY t3.idVendedor
+
+ORDER BY qtdPcs DESC
